@@ -1,0 +1,202 @@
+
+
+// converting digits to words
+
+
+ #include <stdio.h>
+#define size 19
+
+int s[size] ,top=-1;
+void push(int temp){
+   
+    if(top>=size){
+        printf("stack overflow\n");
+    }
+    else{
+        top++;
+        s[top]=temp;
+    }
+}
+   
+
+void main(){
+
+    long long int  num,n=1; //899999999999999999   //9223372036854775807 // 8once 17times 9
+    int pV,i,stop;
+    printf("ENTER THE NUMBER :");
+    scanf("%lld",&num);
+    char units[10][10]= {"zero","one","two","three","four","five","six","seven","eight","nine"};
+    char teen[10][10]= {"ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","ninteen"};
+    char ty[8][8]= {"twenty","thirty","fourty","fifty","sixty","seventy","eighty","ninghty"};
+    //to know place values starts here for loop
+    for( i=0;i<(num/n)*10;i++){      
+        push(pV=(num/n)%10); 
+        n=n*10;
+
+    }
+
+    // place value for loop ends here
+
+    printf("\nNoOfDigits %d\n\n",top+1);
+
+
+    // place value teaching starts here
+    if(top<14)
+   {
+       //crore crore teching starts here
+         //ten lakhs crores starts here
+        if(s[13]>1){
+             printf(" %s",ty[s[13]-2]);
+            if(s[12]>0){
+                printf(" %s lakhs ",units[s[12]]);
+            }
+            else{
+                printf(" lakhs ");
+            }
+        }
+        if(s[13]==1){
+            printf(" %s lakhs",teen[s[2]]);
+        }
+        //lakhs crores starts here
+        if (s[13]==0){
+            if(s[12]>0)
+            {
+                printf(" %s lakhs ",units[s[12]]);
+            }
+        }
+        //ten lakhs crores starts here
+        if(s[11]>1){
+            printf("%s ",ty[s[11]-2]);
+                if(s[11]>0){
+                    printf("%s thousand ",units[s[10]]);
+                }
+                else{
+                    printf("thousand");
+                }
+        }
+        if(s[11]==1){
+            printf(" %s thousand ",teen[s[10]]);
+        }  
+        //thousand crores crores starts here    
+        if(s[11]==0){
+            if(s[10]>0){
+                printf("%s thousand ",units[s[10]]);
+            }  
+        }
+        //hundred crores starts here
+        if(s[9]>0){
+            printf("%s hundred ",units[s[9]]);
+        }
+        // ten crores teaching done here
+        if(s[8]>1){
+            if(s[9]>0){
+                printf(" and ");
+            }
+            printf(" %s ",ty[s[8]-2]);
+            if(s[7]>0)
+            {
+                
+                printf(" %s  ",units[s[7]]);
+            }
+           
+          
+        }
+        if(s[8]==1){
+            if(s[9]>0){
+                printf(" and ");
+            }
+            printf(" %s  ",teen[s[7]]);
+        }
+        // crores teaching starts here
+        if(s[8]==0){
+            if(s[7]>0){
+                if(s[9]>0){
+                printf(" and ");
+            }
+                printf(" %s ",units[s[7]]);
+            }
+          
+        }
+        
+            
+             if(s[13]>0||s[12]>0||s[11]>0||s[10]>0||s[9]>0||s[8]>0||s[7]>0) {
+                printf(" crores ");
+
+                }  
+              
+        
+        //ten lakhs starts here
+        if(s[6]>1){
+             printf(" %s",ty[s[6]-2]);
+            if(s[5]>0){
+                printf(" %s lakhs ",units[s[5]]);
+            }
+            else{
+                printf(" lakhs ");
+            }
+        }
+        if(s[6]==1){
+            printf(" %s lakhs",teen[s[5]]);
+        }
+        //lakhs starts here
+        if (s[6]==0){
+            if(s[5]>0)
+            {
+                printf(" %s lakhs ",units[s[5]]);
+            }
+        }
+        //ten thousand starts here
+        if(s[4]>1){
+            printf("%s ",ty[s[4]-2]);
+                if(s[3]>0){
+                    printf("%s thousand ",units[s[3]]);
+                }
+                else{
+                    printf(" thousand ");
+                }
+        }   
+        if(s[4]==1){
+            printf("%s thousand ",teen[s[3]]);
+        }
+        //thousands teaching done here
+        if(s[4]==0) {    
+            if(s[3]>0){
+                printf("%s thousand ",units[s[3]]);
+            }  
+        }
+        //hunerds starts here
+        if(s[2]>0){
+            printf("%s hundred ",units[s[2]]);
+        }
+        
+        //tens
+        if (s[1]>1){
+            printf(" and %s ",ty[s[1]-2]);
+            if(s[0]>0){
+                printf("  %s ",units[s[0]]);
+            }
+            
+        }
+        else if (s[1]==1){
+            printf("and %s ",teen[s[0]]); 
+        }   
+        //units     
+        else {
+             if(s[0]>0){
+                printf(" and  %s ",units[s[0]]);
+             }
+        }
+        
+            if(num==0){
+                printf(" %s ",units[s[0]]);
+            }
+        
+  
+    
+   } // place value teaching ends here
+   else{
+       printf(" this code accepts only 15 digits");
+   }
+
+
+}

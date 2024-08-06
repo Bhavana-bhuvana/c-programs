@@ -1,0 +1,51 @@
+
+#include<stdio.h>
+
+int main()
+{
+    int n;
+    printf("ENTER NUMBER  :");
+    scanf("%d",&n);
+    int array[n][n];
+    int l=0,d=1,r=n-1,u=n-1;
+    int t=0;
+
+    for(int i=0;i<=n/2;i++){
+        //from left to right 1st loop
+        for(int i=l;i<=u;i++){
+            t++;
+            array[l][i]=t;
+        }
+        //form up to down 2nd loop
+    t++ ; 
+
+        for(int  i=d;i<=r;i++){
+            array[i][r]=t++;   
+         }
+        //from right to left 3rd loop
+        for(int i=u-1;i>=l;i--){
+            array[u][i]=t++;
+        
+        }
+        // down to up fourth loop 
+
+         for(int i=r-1;i>=d;i--){
+            array[i][l]=t++;
+        }
+    t--;
+
+    l++;
+    d++;
+    r--;
+    u--;
+    } //loop closing bracket
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            printf("%d\t",array[i][j]);
+        }
+        printf("\n\n\n");
+    }
+    printf("\n\n\n ");
+    printf("\n\n\n ");
+}
+
