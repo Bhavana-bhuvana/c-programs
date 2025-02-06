@@ -3,6 +3,7 @@
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter// .
 package org.example;
 
+import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -13,18 +14,36 @@ import java.io.*;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+
 
 public class Main{
 
     // Function to extract text from an image
     public static String extractTextFromImage(String imagePath) {
-        Tesseract tesseract = new Tesseract();
-        tesseract.setDatapath("C:\\Program Files\\Tesseract-OCR\\tessdata");
         try {
-            return tesseract.doOCR(new File(imagePath)).toLowerCase();
-        } catch (TesseractException e) {
-            System.out.println("Error extracting text from image: " + e.getMessage());
-            return "";
+            // Convert WebP to PNG (if needed)
+            String convertedImagePath = imagePath;
+            if (imagePath.toLowerCase().endsWith(".webp")) {
+                convertedImagePath = imagePath.replace(".webp", ".png");
+                BufferedImage image = ImageIO.read(new File(imagePath));
+                ImageIO.write(image, "png", new File(convertedImagePath));
+
+            }
+
+            // Process the (possibly converted) image
+            File imageFile = new File(convertedImagePath);
+            Tesseract tesseract = new Tesseract();
+            tesseract.setDatapath("C:\\Program Files\\Tesseract-OCR\\tessdata");  // Set Tesseract path
+            tesseract.setLanguage("eng");  // Set OCR language
+            return tesseract.doOCR(imageFile).toLowerCase();
+
+        } catch (IOException | TesseractException e) {
+            e.printStackTrace();
+            return "Error extracting text from image.";
         }
     }
 
