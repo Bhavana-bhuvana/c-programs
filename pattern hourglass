@@ -1,16 +1,15 @@
-
 #include <stdio.h>
 
 void  main()
 {
     int n;
-   /* printf("* * * * * * *");
+    printf("* * * * * * *");
     printf("\n  *       *");
     printf("\n    *   *");
     printf("\n      *");
     printf("\n    *   *");
     printf("\n  *       *");
-    printf("\n* * * * * * ");/
+    printf("\n* * * * * * * ");
     printf("\n \n");
     printf("enter the number:");
     scanf("%d",&n);
